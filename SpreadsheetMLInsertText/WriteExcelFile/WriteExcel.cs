@@ -38,9 +38,9 @@ namespace WriteExcelFile
 
         static void Main(string[] args)
         {
-            WriteData a = new WriteData();
-            var b = a?.BirthDate?.Year ;
-            ? : 
+            //WriteData a = new WriteData();
+            //var b = a?.BirthDate?.Year ;
+            //? : 
             List<WriteData> listText = new List<WriteData>();
             for (int i = 0; i < 3; i++)
             {
@@ -54,15 +54,15 @@ namespace WriteExcelFile
             headColumn.Add("出生日期");
             //WriteExcelFile<WriteData>(@"E:\TestOpenXML\writeTest2.xlsx", listText, headColumn);
             List<int> mulListString = new List<int>();
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 1000; i++)
             {
                 mulListString.Add(i);
             }
-            WriteExcelFile<int>(@"E:\TestOpenXML\writeTest3.xlsx", mulListString, headColumn);
+            WriteExcelFile<int>(@"D:\Test\writeTest3.xlsx", mulListString, headColumn);
 
         }
         /// <summary>
-        /// 将一系列数据写入到指定Excel文件中
+        /// 将一系列数据写入到指定Excel文件中，对象只能插入一层数据，对象中嵌套的对象值不能添加
         /// </summary>
         /// <typeparam name="TData"></typeparam>
         /// <param name="fileName"></param>
@@ -82,10 +82,19 @@ namespace WriteExcelFile
                 uint rowIndex = 1;
                 InsertHeadColumn(rowIndex, worksheetPart, headColumn, shareStringPart);
                 rowIndex = 2;
-                //InsertTextToCellWithColumn(rowIndex, worksheetPart, listText, shareStringPart);
-                TestInsertTextToCellWithColumn(rowIndex, worksheetPart, listText, shareStringPart);
-
-
+                var text = listText.FirstOrDefault();
+                if (text == null)
+                {
+                    return;
+                }
+                if (String.Compare(text.GetType().BaseType.Name, "ValueType") == 0)
+                {
+                    InsertValueTextToCellWithColumn(rowIndex, worksheetPart, listText, shareStringPart);
+                }
+                else
+                {
+                    InsertTextToCellWithColumn(rowIndex, worksheetPart, listText, shareStringPart);
+                }
 
             }
         }
@@ -97,22 +106,27 @@ namespace WriteExcelFile
             }
             Worksheet worksheet = worksheetPart.Worksheet;
             SheetData sheetData = worksheet.GetFirstChild<SheetData>();
+            
             foreach (var Text in ListText)
             {
                 Row row;
                 row = new Row() { RowIndex = rowIndex };
                 sheetData.Append(row);
-                int columnIndex = Asc("A");
-                string columnName = String.Empty;
+                char[] columnIndex = new char[] { ' ', ' ', 'A' };
                 string cellReference = null;
                 //将数据写入该列名中
-                //判断该数据是不是Text，如果是数值，可直接加入，但在用户信息处，都是Text
+                //判断该数据是不是Text，如果是数值，可直接加入
                 var typeText = Text.GetType();
 
                 foreach (var prop in typeText.GetProperties())
                 {
+                    string columnName = String.Empty;
+                    for (int i = 0; i < 3; i++)
+                    {
+                        columnName += columnIndex[i].ToString();
+                    }
                     //已经是行数据了，可将值插入到Row中
-                    cellReference = columnName + Chr(columnIndex) + rowIndex;
+                    cellReference = columnName + rowIndex;
                     Cell newCell = new Cell() { CellReference = cellReference };
                     row.AppendChild(newCell);
                     worksheet.Save();
@@ -126,17 +140,30 @@ namespace WriteExcelFile
                     }
                     newCell.CellValue = new CellValue(value.ToString());
                     worksheetPart.Worksheet.Save();
-                    columnIndex++;
-                    if (columnIndex > Asc("Z"))
+                    columnIndex[2]++;
+                    if (columnIndex[2] > 'Z')
                     {
-                        columnIndex = Asc("A");
-                        columnName += "A";
+                        //A 之后为AA ,AZ然后是BA,ZZ后面是AAA
+                        columnIndex[2] = 'A';
+                        columnIndex[1] = (columnIndex[1] == ' ') ? 'A' : columnIndex[1]++;
+                        if (columnIndex[1] > 'Z')
+                        {
+                            columnIndex[1] = 'A';
+                            columnIndex[0] = (columnIndex[0] == ' ') ? 'A' : columnIndex[0]++;
+                            if (columnIndex[0] > 'Z')
+                            {
+                                //如果出现这种情况，说明文本过大，从头开始写
+                                columnIndex[0] = ' ';
+                                columnIndex[1] = ' ';
+                                columnIndex[2] = 'A';
+                            }
+                        }
                     }
                 }
                 rowIndex++;
             }
         }
-        private static void TestInsertTextToCellWithColumn<T>(uint rowIndex, WorksheetPart worksheetPart, List<T> ListText, SharedStringTablePart shareStringPart)
+        private static void InsertValueTextToCellWithColumn<T>(uint rowIndex, WorksheetPart worksheetPart, List<T> ListText, SharedStringTablePart shareStringPart)
         {
             if (worksheetPart == null || ListText == null || shareStringPart == null)
             {
@@ -147,19 +174,25 @@ namespace WriteExcelFile
             Row row;
             row = new Row() { RowIndex = rowIndex };
             sheetData.Append(row);
-            char columnIndex = 'A';
-            string columnName = String.Empty;
+            char[] columnIndex = new char[] {' ',' ','A' };
             string cellReference = null;
             foreach (var Text in ListText)
             {
 
                 //将数据写入该列名中
                 //判断该数据是不是Text，如果是数值，可直接加入，但在用户信息处，都是Text
-                var typeText = Text.GetType();
+                string columnName = String.Empty;
 
-                
+               
+                for (int i = 0; i< 3; i++)
+                {
+                    columnName += columnIndex[i].ToString();
+
+                }
                 //已经是行数据了，可将值插入到Row中
-                cellReference = columnName + columnIndex.ToString() + rowIndex;
+                //cellReference = columnName + columnIndex.ToString() + rowIndex;
+                cellReference = columnName + rowIndex;
+
                 Cell newCell = new Cell() { CellReference = cellReference };
                 row.AppendChild(newCell);
                 worksheet.Save();
@@ -173,25 +206,28 @@ namespace WriteExcelFile
                 }
                 newCell.CellValue = new CellValue(value.ToString());
                 worksheetPart.Worksheet.Save();
-                columnIndex++;
-                if (columnIndex > Asc("Z"))
+                columnIndex[2]++;
+                if (columnIndex[2] > 'Z')
                 {
                     //A 之后为AA ,AZ然后是BA,ZZ后面是AAA
-                    columnIndex = Asc("A");
-                    //先把column加1，由A变为B，再赋值
-                    var charByte = new Char[5] ;
-                    
-                    for (int i = 0; i < columnName.Length; i++)
+                    columnIndex[2] = 'A';
+                    columnIndex[1] = (columnIndex[1] == ' ') ? 'A' : columnIndex[1]++;
+                    if(columnIndex[1] > 'Z')
                     {
-                        var columnChar = columnName[i];
-                        
-                        if (Asc(columnChar.ToString()) > Asc("Z"))
+                        columnIndex[1] = 'A';
+
+                        columnIndex[0] = (columnIndex[0] == ' ') ? 'A' : columnIndex[0]++;
+
+                        if (columnIndex[0] > 'Z')
                         {
-                            //columnName[0]需变为A
-                            charByte[i] = Char.Parse("A");
+                            //如果出现这种情况，说明文本过大，从头开始写
+                            columnIndex[0] = ' ';
+                            columnIndex[1] = ' ';
+                            columnIndex[2] = 'A';
+
+
                         }
                     }
-                    columnName += "A";
                 }
 
 
