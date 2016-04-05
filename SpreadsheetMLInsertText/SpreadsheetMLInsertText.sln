@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpreadsheetMLInsertText", "SpreadsheetMLInsertText\SpreadsheetMLInsertText.csproj", "{43D13B89-8EBC-4777-9D46-0E8DAFA0A1D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsertTextInSpecialML", "InsertTextInSpecialML\InsertTextInSpecialML.csproj", "{07A44E94-72AB-48DA-82CC-6D866DA85C81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetCellValue", "GetCellValue\GetCellValue.csproj", "{E6CA65A9-0DA2-42CC-8A6D-A1FC119005CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetColumnHeading", "GetColumnHeading\GetColumnHeading.csproj", "{10A38898-13D7-40B8-9BFA-6F68BA8912C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WriteExcelFile", "WriteExcelFile\WriteExcelFile.csproj", "{51EFF205-0C4D-4F13-B6C3-753C17E35206}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{43D13B89-8EBC-4777-9D46-0E8DAFA0A1D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43D13B89-8EBC-4777-9D46-0E8DAFA0A1D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43D13B89-8EBC-4777-9D46-0E8DAFA0A1D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43D13B89-8EBC-4777-9D46-0E8DAFA0A1D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07A44E94-72AB-48DA-82CC-6D866DA85C81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07A44E94-72AB-48DA-82CC-6D866DA85C81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07A44E94-72AB-48DA-82CC-6D866DA85C81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07A44E94-72AB-48DA-82CC-6D866DA85C81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6CA65A9-0DA2-42CC-8A6D-A1FC119005CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6CA65A9-0DA2-42CC-8A6D-A1FC119005CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6CA65A9-0DA2-42CC-8A6D-A1FC119005CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6CA65A9-0DA2-42CC-8A6D-A1FC119005CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10A38898-13D7-40B8-9BFA-6F68BA8912C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10A38898-13D7-40B8-9BFA-6F68BA8912C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10A38898-13D7-40B8-9BFA-6F68BA8912C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10A38898-13D7-40B8-9BFA-6F68BA8912C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51EFF205-0C4D-4F13-B6C3-753C17E35206}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51EFF205-0C4D-4F13-B6C3-753C17E35206}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51EFF205-0C4D-4F13-B6C3-753C17E35206}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51EFF205-0C4D-4F13-B6C3-753C17E35206}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
