@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateMinWordDoc", "CreateM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateTableInDoc", "CreateTableInDoc\CreateTableInDoc.csproj", "{F2AC566D-340C-4FC3-8634-AD600C8F42E1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplyStyleParagraph", "ApplyStyleParagraph\ApplyStyleParagraph.csproj", "{205F9D70-68CC-4EC2-81D3-BEEA6A979609}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F2AC566D-340C-4FC3-8634-AD600C8F42E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2AC566D-340C-4FC3-8634-AD600C8F42E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2AC566D-340C-4FC3-8634-AD600C8F42E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{205F9D70-68CC-4EC2-81D3-BEEA6A979609}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{205F9D70-68CC-4EC2-81D3-BEEA6A979609}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{205F9D70-68CC-4EC2-81D3-BEEA6A979609}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{205F9D70-68CC-4EC2-81D3-BEEA6A979609}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
